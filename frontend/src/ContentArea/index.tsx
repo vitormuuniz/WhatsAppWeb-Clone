@@ -1,10 +1,16 @@
-import { StyDiv } from './styles';
+import { useEffect, useState } from "react";
+import ChatIntro from "../components/ChatIntro";
+import ChatWindow from "../components/ChatWindow";
+import { Chat } from "../interfaces/Chat";
+import { Content } from "./styles";
 
-function ContentArea() {
+interface IProps {
+  activeChat: Chat;
+}
+const ContentArea: React.FC<IProps> = ({ activeChat }) => {
+
   return (
-    <StyDiv>
-        ...
-    </StyDiv>
+    <Content>{activeChat === null ? <ChatIntro /> : <ChatWindow />}</Content>
   );
 }
 

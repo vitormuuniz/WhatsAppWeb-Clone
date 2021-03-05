@@ -1,12 +1,20 @@
-import { StyWindow } from './styles';
+import { useState } from 'react';
 import ContentArea from './ContentArea';
 import Sidebar from './Sidebar';
+import { StyWindow } from './styles';
 
 function App() {
+  const [activeChat, setActiveChat] = useState<any>(null);
+
   return (
     <StyWindow>
-        <Sidebar/>
-        <ContentArea/>
+        <Sidebar 
+          activeChat={activeChat}
+          setActiveChat={setActiveChat}
+        />
+        <ContentArea
+          activeChat={activeChat}
+        />
     </StyWindow>
   );
 }

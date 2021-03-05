@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const Content = styled.div`
+interface IContent {
+    readonly onClick: any;
+    readonly active: boolean;
+}
+export const Content = styled.div<IContent>`
   display: flex;
   cursor: pointer;
   align-items: center;
@@ -9,6 +13,8 @@ export const Content = styled.div`
   :hover {
       background-color: #F5F5F5;
   }
+
+  background-color: ${(props) => props.active && "#EBEBEB"}
 `;
 
 export const Avatar = styled.img`

@@ -9,6 +9,6 @@ export const StyWindow = styled.div`
   body {
     background-color: #d2dbdc;
     margin: 0;
-    font-family: 'Segoe UI', Helvetica Neue, Helvetica, Lucida Grande, Arial;
+    font-family: "Segoe UI", Helvetica Neue, Helvetica, sans-serif;
   }
 `;
