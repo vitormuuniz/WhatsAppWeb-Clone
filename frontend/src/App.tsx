@@ -2,7 +2,7 @@ import { useState } from "react";
 import ContentArea from "./ContentArea";
 import { User } from "./interfaces/User";
 import Sidebar from "./Sidebar";
-import { StyWindow } from "./styles";
+import { Content } from "./styles";
 
 function App() {
   const [activeUser, setActiveUser] = useState<any>(null);
@@ -35,14 +35,14 @@ function App() {
   ]);
 
   return (
-    <StyWindow>
+    <Content>
       <Sidebar
         user={user}
         chatList={chatList}
         setActiveUser={setActiveUser}
       />
       <ContentArea user={activeUser} />
-    </StyWindow>
+    </Content>
   );
 }
 

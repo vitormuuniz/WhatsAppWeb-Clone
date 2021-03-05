@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 export const Content = styled.div`
-  background-color: #F8F9FA;
+  background-color: #f8f9fa;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
-  border-bottom: 6px solid #4ADF83;
+  position: relative;
 
   h1 {
     font-size: 32px;
@@ -24,6 +24,16 @@ export const Content = styled.div`
     line-height: 20px;
     text-align: center;
   }
+`;
+
+export const HorizontalLine = styled.hr`
+  width: 100%;
+  height: 6px;
+  margin: 0;
+  background-color: #4adf83;
+  border-width: 0;
+  position: absolute;
+  bottom: 0;
 `;
 
 export const ChatIntroImage = styled.img`
