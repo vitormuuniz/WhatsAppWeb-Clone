@@ -2,54 +2,31 @@ import ChatIcon from "@material-ui/icons/Chat";
 import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import SearchIcon from "@material-ui/icons/Search";
-import React, { useState } from "react";
+import React from "react";
 import ChatListItem from "../components/ChatListItem";
-import { ChatItem } from "../interfaces/ChatItem";
+import { User } from "../interfaces/User";
 import {
-  ChatList, Content,
+  ChatList,
+  Content,
   Header,
-  HeaderButtonArea, HeaderButtons, HeaderImage,
+  HeaderButtonArea,
+  HeaderButtons,
+  HeaderImage,
   Search,
   SearchInput,
   SearchInputArea
 } from "./styles";
 
 interface IProps {
-  activeChat?: ChatItem;
-  setActiveChat: Function;
+  user: User;
+  chatList: User[];
+  setActiveUser: Function;
 }
-const Sidebar: React.FC<IProps> = ({ activeChat, setActiveChat }) => {
-  const [chatList] = useState<ChatItem[]>([
-    {
-      chatId: 1,
-      name: "Fulano de tal 1",
-      avatar:
-        "https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png",
-    },
-    {
-      chatId: 2,
-      name: "Fulano de tal 2",
-      avatar:
-        "https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png",
-    },
-    {
-      chatId: 3,
-      name: "Fulano de tal 3",
-      avatar:
-        "https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png",
-    },
-    {
-      chatId: 4,
-      name: "Fulano de tal 4",
-      avatar:
-        "https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png",
-    },
-  ]);
-
+const Sidebar: React.FC<IProps> = ({ user, chatList, setActiveUser }) => {
   return (
     <Content>
       <Header>
-        <HeaderImage src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png" />
+        <HeaderImage src={user.avatar} />
 
         <HeaderButtons>
           <HeaderButtonArea>
@@ -78,17 +55,17 @@ const Sidebar: React.FC<IProps> = ({ activeChat, setActiveChat }) => {
       </Search>
 
       <ChatList>
-        {chatList.map((chat: ChatItem, key: number) => (
+        {chatList.map((chat: User, key: number) => (
           <ChatListItem
             key={key}
-            onClick={() => setActiveChat(chat)}
-            chat={chat}
-            active={activeChat?.chatId === chat.chatId}
+            onClick={() => setActiveUser(chat)}
+            user={chat}
+            active={user?.id === chat.id}
           />
         ))}
       </ChatList>
     </Content>
   );
-}
+};
 
 export default Sidebar;

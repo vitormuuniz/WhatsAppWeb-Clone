@@ -1,5 +1,5 @@
 import React from "react";
-import { ChatItem } from "../../interfaces/ChatItem";
+import { User } from "../../interfaces/User";
 import {
   Avatar, 
   Content,
@@ -10,22 +10,22 @@ import {
 } from "./styles";
 
 interface IProps {
-  key: number;
   onClick: any;
-  chat: ChatItem;
+  user: User;
   active: boolean;
+  key: number;
 }
 
-const ChatListItem: React.FC<IProps> = ({ key, onClick, chat, active }) => {
+const ChatListItem: React.FC<IProps> = ({ onClick, user, active }) => {
   return (
     <Content
       onClick={onClick}
       active={active}
     >
-      <Avatar src={chat.avatar} />
+      <Avatar src={user.avatar} />
       <Lines>
         <Line>
-          <LineContactName>{chat.name}</LineContactName>
+          <LineContactName>{user.name}</LineContactName>
           <LineDate>19:00</LineDate>
         </Line>
         <Line>

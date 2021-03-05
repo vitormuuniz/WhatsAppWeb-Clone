@@ -6,8 +6,13 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import SearchIcon from "@material-ui/icons/Search";
 import SendIcon from "@material-ui/icons/Send";
 import EmojiPicker from "emoji-picker-react";
-import React, { useState } from "react";
-import { ChatItem } from "../../interfaces/ChatItem";
+import React, { useEffect, useRef, useState } from "react";
+import SpeechRecognition, {
+  useSpeechRecognition
+} from "react-speech-recognition";
+import { User } from "../../interfaces/User";
+import { Message } from "../../interfaces/Message";
+import MessageItem from "../MessageItem";
 import {
   Body,
   ButtonArea,
@@ -22,20 +27,122 @@ import {
   HeaderAvatar,
   HeaderButtons,
   HeaderInfo,
-  HeaderName,
+  HeaderName
 } from "./styles";
 
-
 interface IProps {
-  activeChat: ChatItem;
+  activeUser: User;
 }
 
-const ChatWindow: React.FC<IProps> = ({ activeChat }) => {
+const ChatWindow: React.FC<IProps> = ({ activeUser }) => {
+  const bodyRef = useRef<any>();
+  const { transcript } = useSpeechRecognition();
+
   const [emojiOpen, setEmojiOpen] = useState<boolean>(false);
   const [text, setText] = useState<string>("");
+  const [listening, setListening] = useState<boolean>(false);
+  const [messagesList] = useState<Message[]>([
+    {
+      idAuthor: 123,
+      content: 'bla bla bla',
+      date: '19:05'
+    },
+    {
+      idAuthor: 321,
+      content: 'bla bla bla bla bla bla',
+      date: '19:06'
+    },
+    {
+      idAuthor: 321,
+      content: 'bla bla bla bla bla bla bla bla bla',
+      date: '19:10'
+    },
+    {
+      idAuthor: 123,
+      content: 'BLA BLA BLA',
+      date: '19:05'
+    },
+    {
+      idAuthor: 321,
+      content: 'BLA BLA BLA BLA BLA BLA',
+      date: '19:06'
+    },
+    {
+      idAuthor: 321,
+      content: 'BLA BLA BLA BLA BLA BLA BLA BLA BLA',
+      date: '19:10'
+    },
+    {
+      idAuthor: 123,
+      content: 'bla bla bla',
+      date: '19:05'
+    },
+    {
+      idAuthor: 321,
+      content: 'bla bla bla bla bla bla',
+      date: '19:06'
+    },
+    {
+      idAuthor: 321,
+      content: 'bla bla bla bla bla bla bla bla bla',
+      date: '19:10'
+    },
+    {
+      idAuthor: 123,
+      content: 'bla bla bla',
+      date: '19:05'
+    },
+    {
+      idAuthor: 321,
+      content: 'bla bla bla bla bla bla',
+      date: '19:06'
+    },
+    {
+      idAuthor: 321,
+      content: 'bla bla bla bla bla bla bla bla bla',
+      date: '19:10'
+    },
+    {
+      idAuthor: 123,
+      content: 'bla bla bla',
+      date: '19:05'
+    },
+    {
+      idAuthor: 321,
+      content: 'bla bla bla bla bla bla',
+      date: '19:06'
+    },
+    {
+      idAuthor: 321,
+      content: 'bla bla bla bla bla bla bla bla bla',
+      date: '19:10'
+    },
+    {
+      idAuthor: 123,
+      content: 'bla bla bla',
+      date: '19:05'
+    },
+    {
+      idAuthor: 321,
+      content: 'bla bla bla bla bla bla',
+      date: '19:06'
+    },
+    {
+      idAuthor: 321,
+      content: 'bla bla bla bla bla bla bla bla bla',
+      date: '19:10'
+    },
+  ]);
+
+  useEffect(() => {
+    if (bodyRef.current.scrollHeight > bodyRef.current.offsetHeight) {
+      bodyRef.current.scrollTop = bodyRef.current.scrollHeight - bodyRef.current.offsetHeight;
+    }  
+
+  }, [messagesList])
 
   function handleEmojiClick(e: any, emojiObject: any) {
-    setText(text + emojiObject.emoji)
+    setText(text + emojiObject.emoji);
   }
 
   function handleOpenEmoji() {
@@ -46,13 +153,31 @@ const ChatWindow: React.FC<IProps> = ({ activeChat }) => {
     setEmojiOpen(false);
   }
 
+  function handleMicClick() {
+    if (SpeechRecognition.browserSupportsSpeechRecognition() !== null) {
+      if (!listening) {
+        SpeechRecognition.startListening();
+        setListening(true);
+      }
+
+      if (listening) {
+        SpeechRecognition.stopListening();
+        setListening(false);
+        setText(text + transcript);
+      }
+
+    }
+  }
+
+  function handleSendClick() {}
+
   return (
     <Content>
       <Header>
         <HeaderInfo>
           <HeaderAvatar src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png" />
 
-          <HeaderName>{activeChat.name}</HeaderName>
+          <HeaderName>{activeUser.name}</HeaderName>
         </HeaderInfo>
 
         <HeaderButtons>
@@ -70,7 +195,15 @@ const ChatWindow: React.FC<IProps> = ({ activeChat }) => {
         </HeaderButtons>
       </Header>
 
-      <Body></Body>
+      <Body ref={bodyRef}>
+        {messagesList.map((message: any, key: number) => (
+          <MessageItem 
+              activeUser={activeUser}
+              message={message}
+              key={key}
+          />
+        ))}
+      </Body>
 
       <EmojiArea emojiOpen={emojiOpen}>
         <EmojiPicker
@@ -107,11 +240,14 @@ const ChatWindow: React.FC<IProps> = ({ activeChat }) => {
         <FooterPos>
           {text.length === 0 ? (
             <ButtonArea>
-              <MicIcon htmlColor="#919191" />
+              <MicIcon
+                htmlColor={listening ? "#126ECE" : "#919191"}
+                onClick={handleMicClick}
+              />
             </ButtonArea>
           ) : (
             <ButtonArea>
-              <SendIcon htmlColor="#919191" />
+              <SendIcon htmlColor="#919191" onClick={handleSendClick} />
             </ButtonArea>
           )}
         </FooterPos>
