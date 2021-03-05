@@ -7,6 +7,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import SendIcon from "@material-ui/icons/Send";
 import EmojiPicker from "emoji-picker-react";
 import React, { useState } from "react";
+import { ChatItem } from "../../interfaces/ChatItem";
 import {
   Body,
   ButtonArea,
@@ -24,7 +25,12 @@ import {
   HeaderName,
 } from "./styles";
 
-const ChatWindow = () => {
+
+interface IProps {
+  activeChat: ChatItem;
+}
+
+const ChatWindow: React.FC<IProps> = ({ activeChat }) => {
   const [emojiOpen, setEmojiOpen] = useState<boolean>(false);
   const [text, setText] = useState<string>("");
 
@@ -46,7 +52,7 @@ const ChatWindow = () => {
         <HeaderInfo>
           <HeaderAvatar src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png" />
 
-          <HeaderName>Bonieky Lacerda</HeaderName>
+          <HeaderName>{activeChat.name}</HeaderName>
         </HeaderInfo>
 
         <HeaderButtons>

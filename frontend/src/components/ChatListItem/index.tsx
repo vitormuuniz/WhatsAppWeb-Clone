@@ -1,19 +1,18 @@
 import React from "react";
-import { Chat } from "../../interfaces/Chat";
+import { ChatItem } from "../../interfaces/ChatItem";
 import {
+  Avatar, 
   Content,
-  Avatar,
-  Lines,
   Line,
   LineContactName,
   LineDate,
-  LineLastMsg,
+  LineLastMsg, Lines
 } from "./styles";
 
 interface IProps {
   key: number;
   onClick: any;
-  chat: Chat;
+  chat: ChatItem;
   active: boolean;
 }
 

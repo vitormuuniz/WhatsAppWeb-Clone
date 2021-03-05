@@ -1,28 +1,25 @@
-import React, { useEffect, useState } from "react";
-import {
-  Content,
-  Header,
-  HeaderImage,
-  HeaderButtons,
-  HeaderButtonArea,
-  Search,
-  SearchInput,
-  ChatList,
-  SearchInputArea,
-} from "./styles";
-import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import ChatIcon from "@material-ui/icons/Chat";
+import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import SearchIcon from "@material-ui/icons/Search";
+import React, { useState } from "react";
 import ChatListItem from "../components/ChatListItem";
-import { Chat } from "../interfaces/Chat";
+import { ChatItem } from "../interfaces/ChatItem";
+import {
+  ChatList, Content,
+  Header,
+  HeaderButtonArea, HeaderButtons, HeaderImage,
+  Search,
+  SearchInput,
+  SearchInputArea
+} from "./styles";
 
 interface IProps {
-  activeChat?: Chat;
+  activeChat?: ChatItem;
   setActiveChat: Function;
 }
 const Sidebar: React.FC<IProps> = ({ activeChat, setActiveChat }) => {
-  const [chatList, setChatList] = useState<Chat[]>([
+  const [chatList] = useState<ChatItem[]>([
     {
       chatId: 1,
       name: "Fulano de tal 1",
@@ -81,7 +78,7 @@ const Sidebar: React.FC<IProps> = ({ activeChat, setActiveChat }) => {
       </Search>
 
       <ChatList>
-        {chatList.map((chat: Chat, key: number) => (
+        {chatList.map((chat: ChatItem, key: number) => (
           <ChatListItem
             key={key}
             onClick={() => setActiveChat(chat)}
