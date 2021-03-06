@@ -1,6 +1,6 @@
 # WhatsApp Web Application
 
-##### To run this application you need to execute the following commands in backend and frontend directories: 
+##### To run this application you need to execute the following commands: 
     - yarn install;
     - yarn start;
 
