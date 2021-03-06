@@ -15,4 +15,4 @@ const ChatIntro = () => {
   );
 };
 
-export default ChatIntro;
+export { ChatIntro };

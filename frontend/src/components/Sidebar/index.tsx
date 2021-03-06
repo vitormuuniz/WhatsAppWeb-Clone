@@ -2,9 +2,10 @@ import ChatIcon from "@material-ui/icons/Chat";
 import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import SearchIcon from "@material-ui/icons/Search";
-import React from "react";
-import ChatListItem from "../components/ChatListItem";
-import { User } from "../interfaces/User";
+import React, { useState } from "react";
+import { User } from "../../interfaces/User";
+import { ChatListItem } from "./ChatListItem";
+import { NewChat } from "./NewChat";
 import {
   ChatList,
   Content,
@@ -14,17 +15,26 @@ import {
   HeaderImage,
   Search,
   SearchInput,
-  SearchInputArea
+  SearchInputArea,
 } from "./styles";
 
 interface IProps {
   user: User;
-  chatList: User[];
   setActiveUser: Function;
 }
-const Sidebar: React.FC<IProps> = ({ user, chatList, setActiveUser }) => {
+const Sidebar: React.FC<IProps> = ({ user, setActiveUser }) => {
+  const [showNewChat, setShowNewChat] = useState<boolean>(false);
+  const [chatList, setChatList] = useState<User[]>([]);
+
   return (
     <Content>
+      <NewChat
+        chatList={chatList}
+        setChatList={setChatList}
+        user={user}
+        showNewChat={showNewChat}
+        setShowNewChat={setShowNewChat}
+      />
       <Header>
         <HeaderImage src={user.avatar} />
 
@@ -34,7 +44,10 @@ const Sidebar: React.FC<IProps> = ({ user, chatList, setActiveUser }) => {
           </HeaderButtonArea>
 
           <HeaderButtonArea>
-            <ChatIcon htmlColor="#919191" />
+            <ChatIcon
+              htmlColor="#919191"
+              onClick={() => setShowNewChat(true)}
+            />
           </HeaderButtonArea>
 
           <HeaderButtonArea>
@@ -68,4 +81,4 @@ const Sidebar: React.FC<IProps> = ({ user, chatList, setActiveUser }) => {
   );
 };
 
-export default Sidebar;
+export { Sidebar };

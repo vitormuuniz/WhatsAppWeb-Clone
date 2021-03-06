@@ -47,7 +47,7 @@ export const Search = styled.div`
 `;
 
 export const SearchInputArea = styled.div`
-  background-color #FFF;
+  background-color: #FFF;
   height: 40px;
   border-radius: 20px;
   display: flex;

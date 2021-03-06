@@ -8,11 +8,11 @@ import SendIcon from "@material-ui/icons/Send";
 import EmojiPicker from "emoji-picker-react";
 import React, { useEffect, useRef, useState } from "react";
 import SpeechRecognition, {
-  useSpeechRecognition
+  useSpeechRecognition,
 } from "react-speech-recognition";
-import { User } from "../../interfaces/User";
-import { Message } from "../../interfaces/Message";
-import MessageItem from "../MessageItem";
+import { Message } from "../../../interfaces/Message";
+import { User } from "../../../interfaces/User";
+import { MessageItem } from "./MessageItem";
 import {
   Body,
   ButtonArea,
@@ -27,7 +27,7 @@ import {
   HeaderAvatar,
   HeaderButtons,
   HeaderInfo,
-  HeaderName
+  HeaderName,
 } from "./styles";
 
 interface IProps {
@@ -43,103 +43,103 @@ const ChatWindow: React.FC<IProps> = ({ activeUser }) => {
   const [listening, setListening] = useState<boolean>(false);
   const [messagesList] = useState<Message[]>([
     {
-      idAuthor: 123,
-      content: 'bla bla bla',
-      date: '19:05'
+      idAuthor: "123",
+      content: "bla bla bla",
+      date: "19:05",
     },
     {
-      idAuthor: 321,
-      content: 'bla bla bla bla bla bla',
-      date: '19:06'
+      idAuthor: "321",
+      content: "bla bla bla bla bla bla",
+      date: "19:06",
     },
     {
-      idAuthor: 321,
-      content: 'bla bla bla bla bla bla bla bla bla',
-      date: '19:10'
+      idAuthor: "321",
+      content: "bla bla bla bla bla bla bla bla bla",
+      date: "19:10",
     },
     {
-      idAuthor: 123,
-      content: 'BLA BLA BLA',
-      date: '19:05'
+      idAuthor: "123",
+      content: "BLA BLA BLA",
+      date: "19:05",
     },
     {
-      idAuthor: 321,
-      content: 'BLA BLA BLA BLA BLA BLA',
-      date: '19:06'
+      idAuthor: "321",
+      content: "BLA BLA BLA BLA BLA BLA",
+      date: "19:06",
     },
     {
-      idAuthor: 321,
-      content: 'BLA BLA BLA BLA BLA BLA BLA BLA BLA',
-      date: '19:10'
+      idAuthor: "321",
+      content: "BLA BLA BLA BLA BLA BLA BLA BLA BLA",
+      date: "19:10",
     },
     {
-      idAuthor: 123,
-      content: 'bla bla bla',
-      date: '19:05'
+      idAuthor: "123",
+      content: "bla bla bla",
+      date: "19:05",
     },
     {
-      idAuthor: 321,
-      content: 'bla bla bla bla bla bla',
-      date: '19:06'
+      idAuthor: "321",
+      content: "bla bla bla bla bla bla",
+      date: "19:06",
     },
     {
-      idAuthor: 321,
-      content: 'bla bla bla bla bla bla bla bla bla',
-      date: '19:10'
+      idAuthor: "321",
+      content: "bla bla bla bla bla bla bla bla bla",
+      date: "19:10",
     },
     {
-      idAuthor: 123,
-      content: 'bla bla bla',
-      date: '19:05'
+      idAuthor: "123",
+      content: "bla bla bla",
+      date: "19:05",
     },
     {
-      idAuthor: 321,
-      content: 'bla bla bla bla bla bla',
-      date: '19:06'
+      idAuthor: "321",
+      content: "bla bla bla bla bla bla",
+      date: "19:06",
     },
     {
-      idAuthor: 321,
-      content: 'bla bla bla bla bla bla bla bla bla',
-      date: '19:10'
+      idAuthor: "321",
+      content: "bla bla bla bla bla bla bla bla bla",
+      date: "19:10",
     },
     {
-      idAuthor: 123,
-      content: 'bla bla bla',
-      date: '19:05'
+      idAuthor: "123",
+      content: "bla bla bla",
+      date: "19:05",
     },
     {
-      idAuthor: 321,
-      content: 'bla bla bla bla bla bla',
-      date: '19:06'
+      idAuthor: "321",
+      content: "bla bla bla bla bla bla",
+      date: "19:06",
     },
     {
-      idAuthor: 321,
-      content: 'bla bla bla bla bla bla bla bla bla',
-      date: '19:10'
+      idAuthor: "321",
+      content: "bla bla bla bla bla bla bla bla bla",
+      date: "19:10",
     },
     {
-      idAuthor: 123,
-      content: 'bla bla bla',
-      date: '19:05'
+      idAuthor: "123",
+      content: "bla bla bla",
+      date: "19:05",
     },
     {
-      idAuthor: 321,
-      content: 'bla bla bla bla bla bla',
-      date: '19:06'
+      idAuthor: "321",
+      content: "bla bla bla bla bla bla",
+      date: "19:06",
     },
     {
-      idAuthor: 321,
-      content: 'bla bla bla bla bla bla bla bla bla',
-      date: '19:10'
+      idAuthor: "321",
+      content: "bla bla bla bla bla bla bla bla bla",
+      date: "19:10",
     },
   ]);
 
   useEffect(() => {
     if (bodyRef.current.scrollHeight > bodyRef.current.offsetHeight) {
-      bodyRef.current.scrollTop = bodyRef.current.scrollHeight - bodyRef.current.offsetHeight;
-    }  
-
-  }, [messagesList])
+      bodyRef.current.scrollTop =
+        bodyRef.current.scrollHeight - bodyRef.current.offsetHeight;
+    }
+  }, [messagesList]);
 
   function handleEmojiClick(e: any, emojiObject: any) {
     setText(text + emojiObject.emoji);
@@ -165,7 +165,6 @@ const ChatWindow: React.FC<IProps> = ({ activeUser }) => {
         setListening(false);
         setText(text + transcript);
       }
-
     }
   }
 
@@ -197,11 +196,7 @@ const ChatWindow: React.FC<IProps> = ({ activeUser }) => {
 
       <Body ref={bodyRef}>
         {messagesList.map((message: any, key: number) => (
-          <MessageItem 
-              activeUser={activeUser}
-              message={message}
-              key={key}
-          />
+          <MessageItem key={key} activeUser={activeUser} message={message} />
         ))}
       </Body>
 
@@ -256,4 +251,4 @@ const ChatWindow: React.FC<IProps> = ({ activeUser }) => {
   );
 };
 
-export default ChatWindow;
+export { ChatWindow };

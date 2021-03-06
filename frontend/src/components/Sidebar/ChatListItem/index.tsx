@@ -1,12 +1,13 @@
 import React from "react";
-import { User } from "../../interfaces/User";
+import { User } from "../../../interfaces/User";
 import {
-  Avatar, 
+  Avatar,
   Content,
   Line,
   LineContactName,
   LineDate,
-  LineLastMsg, Lines
+  LineLastMsg,
+  Lines,
 } from "./styles";
 
 interface IProps {
@@ -16,12 +17,9 @@ interface IProps {
   key: number;
 }
 
-const ChatListItem: React.FC<IProps> = ({ onClick, user, active }) => {
+const ChatListItem: React.FC<IProps> = ({ key, onClick, user, active }) => {
   return (
-    <Content
-      onClick={onClick}
-      active={active}
-    >
+    <Content key={key} onClick={onClick} active={active}>
       <Avatar src={user.avatar} />
       <Lines>
         <Line>
@@ -38,4 +36,4 @@ const ChatListItem: React.FC<IProps> = ({ onClick, user, active }) => {
   );
 };
 
-export default ChatListItem;
+export { ChatListItem };

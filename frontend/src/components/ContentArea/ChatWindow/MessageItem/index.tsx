@@ -1,6 +1,6 @@
 import React from "react";
-import { Message } from "../../interfaces/Message";
-import { User } from "../../interfaces/User";
+import { Message } from "../../../../interfaces/Message";
+import { User } from "../../../../interfaces/User";
 import {
   MessageContent,
   MessageDate,
@@ -14,9 +14,9 @@ interface IProps {
   key: number;
 }
 
-const MessageItem: React.FC<IProps> = ({ activeUser, message }) => {
+const MessageItem: React.FC<IProps> = ({ key, activeUser, message }) => {
   return (
-    <MessageLine sentByContact={activeUser.id === message.idAuthor}>
+    <MessageLine key={key} sentByContact={activeUser.id === message.idAuthor}>
       <MessageObject sentByContact={activeUser.id === message.idAuthor}>
         <MessageContent>{message.content}</MessageContent>
         <MessageDate>{message.date}</MessageDate>
@@ -25,4 +25,4 @@ const MessageItem: React.FC<IProps> = ({ activeUser, message }) => {
   );
 };
 
-export default MessageItem;
+export { MessageItem };
