@@ -1,6 +1,6 @@
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import React, { useEffect, useState } from "react";
-import { add2Users, getContactsList } from "../../../config/Api";
+import { getContactsList } from "../../../config/Api";
 import { User } from "../../../interfaces/User";
 import {
   Contact,
@@ -27,7 +27,6 @@ const NewChat: React.FC<IProps> = ({
   showNewChat,
   setShowNewChat,
 }) => {
-
   async function getChatList() {
     let results = await getContactsList(user.id!);
 
