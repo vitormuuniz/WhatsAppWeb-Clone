@@ -7,11 +7,11 @@ import { User } from "./interfaces/User";
 import { Content } from "./styles";
 
 function App() {
-  const [activeUser, setActiveUser] = useState<any>(null);
+  const [activeChat, setActiveChat] = useState<any>(null);
   const [user, setUser] = useState<any>({
-    id: 'SBaNZkm2Q6WoVVXUon0yP1XglkE3',
-    name: 'Vitor Muniz',
-    avatar: 'https://graph.facebook.com/10214859142550384/picture',
+    id: "P9wjZ3YMH2jxohhLGI1y",
+    name: "Vitor Muniz",
+    avatar: "https://graph.facebook.com/10214859142550384/picture",
   });
 
   const handleLoginData = async (u: any) => {
@@ -34,9 +34,10 @@ function App() {
         <React.Fragment>
           <Sidebar
             user={user}
-            setActiveUser={setActiveUser}
+            activeChat={activeChat}
+            setActiveChat={setActiveChat}
           />
-          <ContentArea user={activeUser} />
+          <ContentArea user={user} activeChat={activeChat} />
         </React.Fragment>
       )}
     </Content>

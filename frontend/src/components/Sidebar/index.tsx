@@ -2,7 +2,8 @@ import ChatIcon from "@material-ui/icons/Chat";
 import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import SearchIcon from "@material-ui/icons/Search";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { onChatList } from "../../config/Api";
 import { User } from "../../interfaces/User";
 import { ChatListItem } from "./ChatListItem";
 import { NewChat } from "./NewChat";
@@ -20,11 +21,18 @@ import {
 
 interface IProps {
   user: User;
-  setActiveUser: Function;
+  activeChat: User;
+  setActiveChat: Function;
 }
-const Sidebar: React.FC<IProps> = ({ user, setActiveUser }) => {
+const Sidebar: React.FC<IProps> = ({ user, activeChat, setActiveChat }) => {
   const [showNewChat, setShowNewChat] = useState<boolean>(false);
   const [chatList, setChatList] = useState<User[]>([]);
+
+  useEffect(() => {
+    if (user !== null) {
+      onChatList(user.id!, setChatList);
+    }
+  }, [user]);
 
   return (
     <Content>
@@ -71,9 +79,9 @@ const Sidebar: React.FC<IProps> = ({ user, setActiveUser }) => {
         {chatList.map((chat: User, key: number) => (
           <ChatListItem
             key={key}
-            onClick={() => setActiveUser(chat)}
-            user={chat}
-            active={user?.id === chat.id}
+            onClick={() => setActiveChat(chat)}
+            chat={chat}
+            active={activeChat && activeChat.chatId === chat.chatId}
           />
         ))}
       </ChatList>

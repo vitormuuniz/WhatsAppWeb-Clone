@@ -1,6 +1,6 @@
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import React, { useEffect, useState } from "react";
-import { getContactsList } from "../../../config/Api";
+import { addNewChat, getContactsList } from "../../../config/Api";
 import { User } from "../../../interfaces/User";
 import {
   Contact,
@@ -27,36 +27,40 @@ const NewChat: React.FC<IProps> = ({
   showNewChat,
   setShowNewChat,
 }) => {
-  async function getChatList() {
-    let results = await getContactsList(user.id!);
-
-    setChatList(results);
-  }
+  const [list, setList] = useState<User[]>([]);
 
   useEffect(() => {
-    if (user !== null) {
-      getChatList();
-    }
-  }, [user]);
+    const getChatList = async () => {
+      if (user !== null) {
+        let results = await getContactsList(user.id!);
+        setList(results);
+      }
+    };
 
-  async function addNewChat(user2: User) {
-    // await add2Users(user, user2);
+    getChatList();
+  }, [user, setList]);
+
+  async function createNewChat(user2: User) {
+    await addNewChat(user, user2);
+
+    handleClose();
+  }
+
+  function handleClose() {
+    setShowNewChat(false);
   }
 
   return (
     <Content showNewChat={showNewChat}>
       <Header>
         <HeaderBackButton>
-          <ArrowBackIcon
-            htmlColor="#FFF"
-            onClick={() => setShowNewChat(false)}
-          />
+          <ArrowBackIcon htmlColor="#FFF" onClick={handleClose} />
         </HeaderBackButton>
         <HeaderTitle>Nova Conversa</HeaderTitle>
       </Header>
       <ContactsList>
-        {chatList.map((contact: User, key: number) => (
-          <Contact key={key} onClick={() => addNewChat(contact)}>
+        {list.map((contact: User, key: number) => (
+          <Contact key={key} onClick={() => createNewChat(contact)}>
             <ContactImage src={contact.avatar} />
             <ContactName>{contact.name}</ContactName>
           </Contact>

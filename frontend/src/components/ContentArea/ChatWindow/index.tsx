@@ -10,6 +10,7 @@ import React, { useEffect, useRef, useState } from "react";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
+import { onChatContent } from "../../../config/Api";
 import { Message } from "../../../interfaces/Message";
 import { User } from "../../../interfaces/User";
 import { MessageItem } from "./MessageItem";
@@ -31,108 +32,23 @@ import {
 } from "./styles";
 
 interface IProps {
-  activeUser: User;
+  user: User;
+  activeChat: User;
 }
 
-const ChatWindow: React.FC<IProps> = ({ activeUser }) => {
+const ChatWindow: React.FC<IProps> = ({ user, activeChat }) => {
   const bodyRef = useRef<any>();
   const { transcript } = useSpeechRecognition();
 
   const [emojiOpen, setEmojiOpen] = useState<boolean>(false);
   const [text, setText] = useState<string>("");
   const [listening, setListening] = useState<boolean>(false);
-  const [messagesList] = useState<Message[]>([
-    {
-      idAuthor: "123",
-      content: "bla bla bla",
-      date: "19:05",
-    },
-    {
-      idAuthor: "321",
-      content: "bla bla bla bla bla bla",
-      date: "19:06",
-    },
-    {
-      idAuthor: "321",
-      content: "bla bla bla bla bla bla bla bla bla",
-      date: "19:10",
-    },
-    {
-      idAuthor: "123",
-      content: "BLA BLA BLA",
-      date: "19:05",
-    },
-    {
-      idAuthor: "321",
-      content: "BLA BLA BLA BLA BLA BLA",
-      date: "19:06",
-    },
-    {
-      idAuthor: "321",
-      content: "BLA BLA BLA BLA BLA BLA BLA BLA BLA",
-      date: "19:10",
-    },
-    {
-      idAuthor: "123",
-      content: "bla bla bla",
-      date: "19:05",
-    },
-    {
-      idAuthor: "321",
-      content: "bla bla bla bla bla bla",
-      date: "19:06",
-    },
-    {
-      idAuthor: "321",
-      content: "bla bla bla bla bla bla bla bla bla",
-      date: "19:10",
-    },
-    {
-      idAuthor: "123",
-      content: "bla bla bla",
-      date: "19:05",
-    },
-    {
-      idAuthor: "321",
-      content: "bla bla bla bla bla bla",
-      date: "19:06",
-    },
-    {
-      idAuthor: "321",
-      content: "bla bla bla bla bla bla bla bla bla",
-      date: "19:10",
-    },
-    {
-      idAuthor: "123",
-      content: "bla bla bla",
-      date: "19:05",
-    },
-    {
-      idAuthor: "321",
-      content: "bla bla bla bla bla bla",
-      date: "19:06",
-    },
-    {
-      idAuthor: "321",
-      content: "bla bla bla bla bla bla bla bla bla",
-      date: "19:10",
-    },
-    {
-      idAuthor: "123",
-      content: "bla bla bla",
-      date: "19:05",
-    },
-    {
-      idAuthor: "321",
-      content: "bla bla bla bla bla bla",
-      date: "19:06",
-    },
-    {
-      idAuthor: "321",
-      content: "bla bla bla bla bla bla bla bla bla",
-      date: "19:10",
-    },
-  ]);
+  const [messagesList, setMessagesList] = useState<Message[]>([]);
+
+  useEffect(() => {
+    setMessagesList([]);
+    onChatContent(user.chatId!, setMessagesList);
+  }, [user.chatId]);
 
   useEffect(() => {
     if (bodyRef.current.scrollHeight > bodyRef.current.offsetHeight) {
@@ -174,9 +90,9 @@ const ChatWindow: React.FC<IProps> = ({ activeUser }) => {
     <Content>
       <Header>
         <HeaderInfo>
-          <HeaderAvatar src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png" />
+          <HeaderAvatar src={activeChat.avatar} />
 
-          <HeaderName>{activeUser.name}</HeaderName>
+          <HeaderName>{activeChat.name}</HeaderName>
         </HeaderInfo>
 
         <HeaderButtons>
@@ -196,7 +112,7 @@ const ChatWindow: React.FC<IProps> = ({ activeUser }) => {
 
       <Body ref={bodyRef}>
         {messagesList.map((message: any, key: number) => (
-          <MessageItem key={key} activeUser={activeUser} message={message} />
+          <MessageItem key={key} activeUser={activeChat} message={message} />
         ))}
       </Body>
 

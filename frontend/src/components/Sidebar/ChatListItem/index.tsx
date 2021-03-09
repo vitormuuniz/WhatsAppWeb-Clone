@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { User } from "../../../interfaces/User";
 import {
   Avatar,
@@ -12,23 +12,45 @@ import {
 
 interface IProps {
   onClick: any;
-  user: User;
+  chat: User;
   active: boolean;
   key: number;
 }
 
-const ChatListItem: React.FC<IProps> = ({ key, onClick, user, active }) => {
+const ChatListItem: React.FC<IProps> = ({ key, onClick, chat, active }) => {
+  const [lastMessageDate, setLastMessageDate] = useState<string>("");
+
+  useEffect(() => {
+    if (chat.lastMessageDate !== undefined) {
+      let { seconds } = chat.lastMessageDate;
+
+      let auxDate: Date = new Date(seconds * 1000);
+
+      let hours: string =
+        auxDate.getHours() < 10
+          ? "0" + auxDate.getHours().toString()
+          : auxDate.getHours().toString();
+
+      let minutes: string =
+        auxDate.getMinutes() < 10
+          ? "0" + auxDate.getMinutes().toString()
+          : auxDate.getMinutes().toString();
+
+      setLastMessageDate(hours + ":" + minutes);
+    }
+  }, [chat]);
+
   return (
     <Content key={key} onClick={onClick} active={active}>
-      <Avatar src={user.avatar} />
+      <Avatar src={chat.avatar} />
       <Lines>
         <Line>
-          <LineContactName>{user.name}</LineContactName>
-          <LineDate>19:00</LineDate>
+          <LineContactName>{chat.name}</LineContactName>
+          <LineDate>{lastMessageDate}</LineDate>
         </Line>
         <Line>
           <LineLastMsg>
-            <p>Opa, tudo bemOpa, tudo bem?</p>
+            <p>{chat.lastMessage}</p>
           </LineLastMsg>
         </Line>
       </Lines>
