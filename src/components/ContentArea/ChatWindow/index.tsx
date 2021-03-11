@@ -120,10 +120,6 @@ const ChatWindow: React.FC<IProps> = ({ user, activeChat }) => {
           </ButtonArea>
 
           <ButtonArea>
-            <AttachFileIcon htmlColor="#919191" />
-          </ButtonArea>
-
-          <ButtonArea>
             <MoreVertIcon htmlColor="#919191" />
           </ButtonArea>
         </HeaderButtons>
@@ -155,6 +151,9 @@ const ChatWindow: React.FC<IProps> = ({ user, activeChat }) => {
               htmlColor={emojiOpen ? "#009688" : "#919191"}
               onClick={handleOpenEmoji}
             />
+          </ButtonArea>
+          <ButtonArea>
+            <AttachFileIcon htmlColor="#919191" />
           </ButtonArea>
         </FooterPre>
 

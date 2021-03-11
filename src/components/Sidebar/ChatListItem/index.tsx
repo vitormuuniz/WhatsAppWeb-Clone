@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Chat } from "../../../interfaces/Chat";
-import { User } from "../../../interfaces/User";
 import {
   Avatar,
   Content,

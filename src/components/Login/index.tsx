@@ -1,7 +1,8 @@
 import React from "react";
-import { Content, LoginButton } from "./styles";
+import { Content, FacebookButton, GoogleButton } from "./styles";
 import { fbPopup, googlePopup } from "../../config/Api";
-
+import FacebookIcon from "@material-ui/icons/Facebook";
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
 interface IProps {
   onReceive: Function;
 }
@@ -26,10 +27,14 @@ const Login: React.FC<IProps> = ({ onReceive }) => {
 
   return (
     <Content>
-      <LoginButton onClick={handleFacebookLogin}>
+      <FacebookButton className="facebook" onClick={handleFacebookLogin}>
+        <FacebookIcon />
         Logar com Facebook
-      </LoginButton>
-      <LoginButton onClick={handleGoogleLogin}>Logar com Google</LoginButton>
+      </FacebookButton>
+      <GoogleButton onClick={handleGoogleLogin}>
+        <AccountBoxIcon />
+        Logar com Google
+      </GoogleButton>
     </Content>
   );
 };

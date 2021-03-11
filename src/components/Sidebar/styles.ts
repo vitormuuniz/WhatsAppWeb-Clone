@@ -1,11 +1,11 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Content = styled.div`
   width: 35%;
   max-width: 415px;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #DDD;
+  border-right: 1px solid #ddd;
 `;
 
 export const Header = styled.header`
@@ -26,7 +26,6 @@ export const HeaderImage = styled.img`
 export const HeaderButtons = styled.div`
   display: flex;
   justify-content: space-between;
-
 `;
 
 export const HeaderButtonArea = styled.div`
@@ -39,15 +38,14 @@ export const HeaderButtonArea = styled.div`
   cursor: pointer;
 `;
 
-
 export const Search = styled.div`
-  background-color: #F6F6F6;
-  border-bottom: 1px solid #EEE;
+  background-color: #f6f6f6;
+  border-bottom: 1px solid #eee;
   padding: 5px 15px;
 `;
 
 export const SearchInputArea = styled.div`
-  background-color: #FFF;
+  background-color: #fff;
   height: 40px;
   border-radius: 20px;
   display: flex;
@@ -58,15 +56,16 @@ export const SearchInputArea = styled.div`
 export const SearchInput = styled.input`
   flex: 1;
   border: 0;
-  outline: 0; 
+  outline: 0;
   background-color: transparent;
   margin-left: 10px;
 `;
 
 export const ChatList = styled.div`
   flex: 1;
-  background-color: #FFF;
+  background-color: #fff;
   overflow-y: auto;
+  transition: all ease 5s;
 
   ::-webkit-scrollbar {
     width: 6px;

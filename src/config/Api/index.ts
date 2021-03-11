@@ -1,4 +1,3 @@
-import { UpdateSharp } from "@material-ui/icons";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firebase-firestore";
@@ -88,7 +87,22 @@ export function onChatList(userId: string, setChatList: Function) {
         let data: User = doc.data()!;
 
         if (data.chats) {
-          setChatList(data.chats);
+          let chats = data.chats;
+
+          chats.sort((a: Chat, b: Chat) => {
+            if (
+              a.lastMessageDate === undefined ||
+              b.lastMessageDate === undefined
+            ) {
+              return -1;
+            }
+            if (a.lastMessageDate.seconds < b.lastMessageDate.seconds) {
+              return 1;
+            } else {
+              return -1;
+            }
+          });
+          setChatList(chats);
         }
       }
     });

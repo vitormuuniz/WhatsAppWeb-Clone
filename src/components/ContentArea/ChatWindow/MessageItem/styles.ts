@@ -34,4 +34,5 @@ export const MessageDate = styled.div`
   text-align: right;
   height: 15px;
   margin-top: -15px;
+  margin-left: 50px;
 `;

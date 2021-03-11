@@ -1,5 +1,4 @@
 import React from "react";
-import { Chat } from "../../../../interfaces/Chat";
 import { Message } from "../../../../interfaces/Message";
 import { User } from "../../../../interfaces/User";
 import {
