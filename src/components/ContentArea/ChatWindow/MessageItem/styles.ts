@@ -1,19 +1,19 @@
 import styled from "styled-components";
 
 interface IMessageLine {
-  readonly sendByMe: boolean;
+  readonly sentByMe: boolean;
 }
 export const MessageLine = styled.div<IMessageLine>`
   margin-bottom: 10px;
   display: flex;
-  justify-content: ${(props) => (props.sendByMe ? `flex-end` : `flex-start`)};
+  justify-content: ${(props) => (props.sentByMe ? `flex-end` : `flex-start`)};
 `;
 
 interface IMessageObject {
-  readonly sendByMe: boolean;
+  readonly sentByMe: boolean;
 }
 export const MessageObject = styled.div<IMessageObject>`
-  background-color: ${(props) => (props.sendByMe ? `#dcf8c6` : `#fff`)};
+  background-color: ${(props) => (props.sentByMe ? `#dcf8c6` : `#fff`)};
   border-radius: 10px;
   box-shadow: 0 1px 1px #ccc;
   display: flex;

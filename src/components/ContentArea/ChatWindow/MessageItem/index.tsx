@@ -17,8 +17,8 @@ interface IProps {
 
 const MessageItem: React.FC<IProps> = ({ key, user, message }) => {
   return (
-    <MessageLine key={key} sendByMe={user.id === message.idAuthor}>
-      <MessageObject sendByMe={user.id === message.idAuthor}>
+    <MessageLine key={key} sentByMe={user.id === message.idAuthor}>
+      <MessageObject sentByMe={user.id === message.idAuthor}>
         <MessageContent>{message.content}</MessageContent>
         <MessageDate>{message.date}</MessageDate>
       </MessageObject>
