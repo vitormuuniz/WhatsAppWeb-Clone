@@ -1,4 +1,5 @@
 import React from "react";
+import { Chat } from "../../../../interfaces/Chat";
 import { Message } from "../../../../interfaces/Message";
 import { User } from "../../../../interfaces/User";
 import {
@@ -9,15 +10,15 @@ import {
 } from "./styles";
 
 interface IProps {
-  activeUser: User;
+  user: User;
   message: Message;
   key: number;
 }
 
-const MessageItem: React.FC<IProps> = ({ key, activeUser, message }) => {
+const MessageItem: React.FC<IProps> = ({ key, user, message }) => {
   return (
-    <MessageLine key={key} sentByContact={activeUser.id === message.idAuthor}>
-      <MessageObject sentByContact={activeUser.id === message.idAuthor}>
+    <MessageLine key={key} sendByMe={user.id === message.idAuthor}>
+      <MessageObject sendByMe={user.id === message.idAuthor}>
         <MessageContent>{message.content}</MessageContent>
         <MessageDate>{message.date}</MessageDate>
       </MessageObject>

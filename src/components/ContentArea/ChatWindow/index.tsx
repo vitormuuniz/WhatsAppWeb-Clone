@@ -10,7 +10,8 @@ import React, { useEffect, useRef, useState } from "react";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
-import { onChatContent } from "../../../config/Api";
+import { onChatContent, sendMessage } from "../../../config/Api";
+import { Chat } from "../../../interfaces/Chat";
 import { Message } from "../../../interfaces/Message";
 import { User } from "../../../interfaces/User";
 import { MessageItem } from "./MessageItem";
@@ -33,7 +34,7 @@ import {
 
 interface IProps {
   user: User;
-  activeChat: User;
+  activeChat: Chat;
 }
 
 const ChatWindow: React.FC<IProps> = ({ user, activeChat }) => {
@@ -44,11 +45,17 @@ const ChatWindow: React.FC<IProps> = ({ user, activeChat }) => {
   const [text, setText] = useState<string>("");
   const [listening, setListening] = useState<boolean>(false);
   const [messagesList, setMessagesList] = useState<Message[]>([]);
+  const [usersList, setUsersList] = useState<User[]>();
 
   useEffect(() => {
     setMessagesList([]);
-    onChatContent(user.chatId!, setMessagesList);
-  }, [user.chatId]);
+    let unsub = onChatContent(
+      activeChat.chatId!,
+      setMessagesList,
+      setUsersList
+    );
+    return unsub;
+  }, [activeChat.chatId]);
 
   useEffect(() => {
     if (bodyRef.current.scrollHeight > bodyRef.current.offsetHeight) {
@@ -84,13 +91,25 @@ const ChatWindow: React.FC<IProps> = ({ user, activeChat }) => {
     }
   }
 
-  function handleSendClick() {}
+  function handleInputKeyUp(e: any) {
+    if (e.keyCode === 13) {
+      handleSendClick();
+    }
+  }
+
+  function handleSendClick() {
+    if (text !== "") {
+      sendMessage(activeChat, user.id!, "text", text, usersList!);
+      setText("");
+      setEmojiOpen(false);
+    }
+  }
 
   return (
     <Content>
       <Header>
         <HeaderInfo>
-          <HeaderAvatar src={activeChat.avatar} />
+          <HeaderAvatar src={activeChat.image} />
 
           <HeaderName>{activeChat.name}</HeaderName>
         </HeaderInfo>
@@ -112,7 +131,7 @@ const ChatWindow: React.FC<IProps> = ({ user, activeChat }) => {
 
       <Body ref={bodyRef}>
         {messagesList.map((message: any, key: number) => (
-          <MessageItem key={key} activeUser={activeChat} message={message} />
+          <MessageItem key={key} user={user} message={message} />
         ))}
       </Body>
 
@@ -145,6 +164,7 @@ const ChatWindow: React.FC<IProps> = ({ user, activeChat }) => {
             placeholder="Digite uma mensagem"
             value={text}
             onChange={(e) => setText(e.target.value)}
+            onKeyUp={handleInputKeyUp}
           />
         </FooterInputArea>
 

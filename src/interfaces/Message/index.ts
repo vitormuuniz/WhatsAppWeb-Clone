@@ -1,5 +1,6 @@
 export interface Message {
-  content: any;
-  date: string;
   idAuthor: string;
+  type: string;
+  content: any;
+  date: any;
 }

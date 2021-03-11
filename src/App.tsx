@@ -3,16 +3,11 @@ import { ContentArea } from "./components/ContentArea";
 import { Login } from "./components/Login";
 import { Sidebar } from "./components/Sidebar";
 import { addUser } from "./config/Api";
-import { User } from "./interfaces/User";
 import { Content } from "./styles";
 
 function App() {
   const [activeChat, setActiveChat] = useState<any>(null);
-  const [user, setUser] = useState<any>({
-    id: "P9wjZ3YMH2jxohhLGI1y",
-    name: "Vitor Muniz",
-    avatar: "https://graph.facebook.com/10214859142550384/picture",
-  });
+  const [user, setUser] = useState<any>(null);
 
   const handleLoginData = async (u: any) => {
     const newUser = {

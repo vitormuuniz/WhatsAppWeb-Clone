@@ -4,6 +4,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import SearchIcon from "@material-ui/icons/Search";
 import React, { useEffect, useState } from "react";
 import { onChatList } from "../../config/Api";
+import { Chat } from "../../interfaces/Chat";
 import { User } from "../../interfaces/User";
 import { ChatListItem } from "./ChatListItem";
 import { NewChat } from "./NewChat";
@@ -21,12 +22,12 @@ import {
 
 interface IProps {
   user: User;
-  activeChat: User;
+  activeChat: Chat;
   setActiveChat: Function;
 }
 const Sidebar: React.FC<IProps> = ({ user, activeChat, setActiveChat }) => {
   const [showNewChat, setShowNewChat] = useState<boolean>(false);
-  const [chatList, setChatList] = useState<User[]>([]);
+  const [chatList, setChatList] = useState<Chat[]>([]);
 
   useEffect(() => {
     if (user !== null) {
@@ -37,8 +38,6 @@ const Sidebar: React.FC<IProps> = ({ user, activeChat, setActiveChat }) => {
   return (
     <Content>
       <NewChat
-        chatList={chatList}
-        setChatList={setChatList}
         user={user}
         showNewChat={showNewChat}
         setShowNewChat={setShowNewChat}
@@ -76,7 +75,7 @@ const Sidebar: React.FC<IProps> = ({ user, activeChat, setActiveChat }) => {
       </Search>
 
       <ChatList>
-        {chatList.map((chat: User, key: number) => (
+        {chatList.map((chat: Chat, key: number) => (
           <ChatListItem
             key={key}
             onClick={() => setActiveChat(chat)}

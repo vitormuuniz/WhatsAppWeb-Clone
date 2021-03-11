@@ -1,5 +1,4 @@
 import React from "react";
-import { User } from "../../interfaces/User";
 import { ChatIntro } from "./ChatIntro";
 import { ChatWindow } from "./ChatWindow";
 import { Content } from "./styles";

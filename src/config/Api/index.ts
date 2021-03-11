@@ -1,7 +1,9 @@
+import { UpdateSharp } from "@material-ui/icons";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firebase-firestore";
 import { Chat } from "../../interfaces/Chat";
+import { Message } from "../../interfaces/Message";
 import { User } from "../../interfaces/User";
 import { firebaseConfig } from "../Firebase";
 
@@ -10,6 +12,12 @@ const db = firebaseApp.firestore();
 
 export async function fbPopup() {
   const provider = new firebase.auth.FacebookAuthProvider();
+  let result = await firebaseApp.auth().signInWithPopup(provider);
+  return result;
+}
+
+export async function googlePopup() {
+  const provider = new firebase.auth.GoogleAuthProvider();
   let result = await firebaseApp.auth().signInWithPopup(provider);
   return result;
 }
@@ -28,6 +36,8 @@ export async function addNewChat(user: User, user2: User) {
   let newChat = await db.collection("chats").add({
     messages: [],
     users: [user.id, user2.id],
+    image: user2.avatar,
+    name: user2.name,
   });
 
   db.collection("users")
@@ -36,7 +46,7 @@ export async function addNewChat(user: User, user2: User) {
       chats: firebase.firestore.FieldValue.arrayUnion({
         chatId: newChat.id,
         name: user2.name,
-        avatar: user2.avatar,
+        image: user2.avatar,
         with: user2.id,
       }),
     });
@@ -47,7 +57,7 @@ export async function addNewChat(user: User, user2: User) {
       chats: firebase.firestore.FieldValue.arrayUnion({
         chatId: newChat.id,
         name: user.name,
-        avatar: user.avatar,
+        image: user.avatar,
         with: user.id,
       }),
     });
@@ -84,15 +94,77 @@ export function onChatList(userId: string, setChatList: Function) {
     });
 }
 
-export function onChatContent(chatId: string, setList: Function) {
+export function onChatContent(
+  chatId: string,
+  setMessagesList: Function,
+  setUsersList: Function
+) {
   return db
     .collection("chats")
     .doc(chatId)
     .onSnapshot((doc) => {
       if (doc.exists) {
         let data: Chat = doc.data()!;
+        data.messages?.forEach((message: Message) => {
+          let { seconds } = message.date;
 
-        setList(data.messages);
+          let auxDate: Date = new Date(seconds * 1000);
+
+          let hours: string =
+            auxDate.getHours() < 10
+              ? "0" + auxDate.getHours().toString()
+              : auxDate.getHours().toString();
+
+          let minutes: string =
+            auxDate.getMinutes() < 10
+              ? "0" + auxDate.getMinutes().toString()
+              : auxDate.getMinutes().toString();
+
+          message.date = hours + ":" + minutes;
+        });
+        setMessagesList(data.messages);
+        setUsersList(data.users);
       }
     });
+}
+
+export function sendMessage(
+  chat: Chat,
+  userId: string,
+  type: string,
+  content: any,
+  users: User[]
+) {
+  let now = new Date();
+
+  db.collection("chats")
+    .doc(chat.chatId)
+    .update({
+      messages: firebase.firestore.FieldValue.arrayUnion({
+        idAuthor: userId,
+        type,
+        content,
+        date: now,
+      }),
+    });
+
+  users.forEach(async (user: User) => {
+    let u = await db.collection("users").doc(String(user)).get();
+    let uData: User = u.data()!;
+
+    if (uData.chats) {
+      let chats: Chat[] = uData.chats;
+
+      chats.forEach((chatItem: Chat) => {
+        if (chatItem.chatId === chat.chatId) {
+          chatItem.lastMessage = content;
+          chatItem.lastMessageDate = now;
+        }
+      });
+
+      await db.collection("users").doc(String(user)).update({
+        chats: chats,
+      });
+    }
+  });
 }

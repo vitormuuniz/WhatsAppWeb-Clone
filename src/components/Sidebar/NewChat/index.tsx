@@ -14,19 +14,11 @@ import {
 } from "./styles";
 
 interface IProps {
-  chatList: User[];
-  setChatList: Function;
   user: User;
   showNewChat: boolean;
   setShowNewChat: Function;
 }
-const NewChat: React.FC<IProps> = ({
-  chatList,
-  setChatList,
-  user,
-  showNewChat,
-  setShowNewChat,
-}) => {
+const NewChat: React.FC<IProps> = ({ user, showNewChat, setShowNewChat }) => {
   const [list, setList] = useState<User[]>([]);
 
   useEffect(() => {
