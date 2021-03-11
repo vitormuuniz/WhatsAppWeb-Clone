@@ -28,12 +28,25 @@ interface IProps {
 const Sidebar: React.FC<IProps> = ({ user, activeChat, setActiveChat }) => {
   const [showNewChat, setShowNewChat] = useState<boolean>(false);
   const [chatList, setChatList] = useState<Chat[]>([]);
+  const [searchChatName, setSearchChatName] = useState<string>("");
 
   useEffect(() => {
     if (user !== null) {
       onChatList(user.id!, setChatList);
     }
   }, [user]);
+
+  useEffect(() => {
+    const results: Chat[] = chatList.filter((chat: Chat) =>
+      chat.name!.toLowerCase().includes(searchChatName.toLowerCase())
+    );
+
+    if (searchChatName === "" || results.length === 0) {
+      onChatList(user.id!, setChatList);
+    } else {
+      setChatList(results);
+    }
+  }, [searchChatName]);
 
   return (
     <Content>
@@ -70,6 +83,10 @@ const Sidebar: React.FC<IProps> = ({ user, activeChat, setActiveChat }) => {
           <SearchInput
             type="search"
             placeholder="Procurar ou começar uma nova conversa"
+            value={searchChatName}
+            onChange={(event: any) => {
+              setSearchChatName(event.target.value);
+            }}
           />
         </SearchInputArea>
       </Search>
