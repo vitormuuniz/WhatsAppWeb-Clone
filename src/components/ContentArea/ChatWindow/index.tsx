@@ -18,7 +18,7 @@ import { MessageItem } from "./MessageItem";
 import {
   Body,
   ButtonArea,
-  Content,
+  ChatWindowContainer,
   EmojiArea,
   Footer,
   FooterInput,
@@ -106,7 +106,7 @@ const ChatWindow: React.FC<IProps> = ({ user, activeChat }) => {
   }
 
   return (
-    <Content>
+    <ChatWindowContainer>
       <Header>
         <HeaderInfo>
           <HeaderAvatar src={activeChat.image} />
@@ -182,7 +182,7 @@ const ChatWindow: React.FC<IProps> = ({ user, activeChat }) => {
           )}
         </FooterPos>
       </Footer>
-    </Content>
+    </ChatWindowContainer>
   );
 };
 

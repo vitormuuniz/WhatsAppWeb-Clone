@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Content = styled.div`
+export const ChatIntroContainer = styled.div`
   background-color: #f8f9fa;
   display: flex;
   flex-direction: column;

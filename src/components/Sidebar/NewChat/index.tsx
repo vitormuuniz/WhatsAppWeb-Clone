@@ -7,7 +7,7 @@ import {
   ContactImage,
   ContactName,
   ContactsList,
-  Content,
+  NewChatContainer,
   Header,
   HeaderBackButton,
   HeaderTitle,
@@ -43,7 +43,7 @@ const NewChat: React.FC<IProps> = ({ user, showNewChat, setShowNewChat }) => {
   }
 
   return (
-    <Content showNewChat={showNewChat}>
+    <NewChatContainer showNewChat={showNewChat}>
       <Header>
         <HeaderBackButton>
           <ArrowBackIcon htmlColor="#FFF" onClick={handleClose} />
@@ -58,7 +58,7 @@ const NewChat: React.FC<IProps> = ({ user, showNewChat, setShowNewChat }) => {
           </Contact>
         ))}
       </ContactsList>
-    </Content>
+    </NewChatContainer>
   );
 };
 

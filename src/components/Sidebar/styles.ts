@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Content = styled.div`
+export const SidebarContainer = styled.div`
   width: 35%;
   max-width: 415px;
   display: flex;

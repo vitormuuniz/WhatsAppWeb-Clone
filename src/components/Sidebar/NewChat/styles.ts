@@ -1,19 +1,19 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 interface IContent {
   readonly showNewChat: boolean;
 }
-export const Content = styled.div<IContent>`
+export const NewChatContainer = styled.div<IContent>`
   width: 35%;
   max-width: 415px;
   position: fixed;
-  left: ${(props) => props.showNewChat ? `0` : `-415px` };
+  left: ${(props) => (props.showNewChat ? `0` : `-415px`)};
   top: 0;
   bottom: 0;
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #DDD;
+  border-right: 1px solid #ddd;
   transition: all ease 0.5s;
 `;
 
@@ -22,7 +22,6 @@ export const Header = styled.div`
   background-color: #00bfa5;
   align-items: center;
   padding: 60px 15px 15px 15px;
-
 `;
 
 export const HeaderBackButton = styled.div`
@@ -80,4 +79,3 @@ export const ContactName = styled.div`
   font-size: 17px;
   color: #000;
 `;
-

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Chat } from "../../../interfaces/Chat";
 import {
   Avatar,
-  Content,
+  ChatListItemContainer,
   Line,
   LineContactName,
   LineDate,
@@ -41,7 +41,7 @@ const ChatListItem: React.FC<IProps> = ({ key, onClick, chat, active }) => {
   }, [chat]);
 
   return (
-    <Content key={key} onClick={onClick} active={active}>
+    <ChatListItemContainer key={key} onClick={onClick} active={active}>
       <Avatar src={chat.image} />
       <Lines>
         <Line>
@@ -54,7 +54,7 @@ const ChatListItem: React.FC<IProps> = ({ key, onClick, chat, active }) => {
           </LineLastMsg>
         </Line>
       </Lines>
-    </Content>
+    </ChatListItemContainer>
   );
 };
 

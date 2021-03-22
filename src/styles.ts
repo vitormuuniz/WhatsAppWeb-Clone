@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export const Content = styled.div`
+export const AppContainer = styled.div`
   box-sizing: border-box;
   display: flex;
   height: 100vh;
-  background-color: #EDEDED;
+  background-color: #ededed;
 `;

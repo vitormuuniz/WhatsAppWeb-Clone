@@ -3,7 +3,7 @@ import { ContentArea } from "./components/ContentArea";
 import { Login } from "./components/Login";
 import { Sidebar } from "./components/Sidebar";
 import { addUser } from "./config/Api";
-import { Content } from "./styles";
+import { AppContainer } from "./styles";
 
 function App() {
   const [activeChat, setActiveChat] = useState<any>(null);
@@ -22,7 +22,7 @@ function App() {
   };
 
   return (
-    <Content>
+    <AppContainer>
       {user === null ? (
         <Login onReceive={handleLoginData} />
       ) : (
@@ -35,7 +35,7 @@ function App() {
           <ContentArea user={user} activeChat={activeChat} />
         </React.Fragment>
       )}
-    </Content>
+    </AppContainer>
   );
 }
 

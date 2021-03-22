@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Content = styled.div`
+export const ChatWindowContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -72,7 +72,7 @@ interface IEmojiArea {
   readonly emojiOpen: boolean;
 }
 export const EmojiArea = styled.div<IEmojiArea>`
-  height: ${(props) => props.emojiOpen ? `200px` : `0` };
+  height: ${(props) => (props.emojiOpen ? `200px` : `0`)};
   overflow-y: hidden;
   transition: all ease 0.3s;
 
@@ -106,10 +106,10 @@ export const FooterInput = styled.input`
   height: 40px;
   border: 0;
   outline: 0;
-  background-color: #FFF;
+  background-color: #fff;
   border-radius: 20px;
   font-size: 15px;
-  color: #4A4A4A;
+  color: #4a4a4a;
   padding-left: 15px;
 `;
 

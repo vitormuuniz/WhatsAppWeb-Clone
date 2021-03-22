@@ -1,8 +1,8 @@
-import { ChatIntroImage, Content, HorizontalLine } from "./styles";
+import { ChatIntroImage, ChatIntroContainer, HorizontalLine } from "./styles";
 
 const ChatIntro = () => {
   return (
-    <Content>
+    <ChatIntroContainer>
       <ChatIntroImage src="https://web.whatsapp.com/img/intro-connection-light_c98cc75f2aa905314d74375a975d2cf2.jpg" />
       <h1>Mantenha seu celular conectado</h1>
       <h2>
@@ -11,7 +11,7 @@ const ChatIntro = () => {
         Para reduzir o uso de dados, conecte seu telefone a uma rede Wi-Fi.
       </h2>
       <HorizontalLine />
-    </Content>
+    </ChatIntroContainer>
   );
 };
 

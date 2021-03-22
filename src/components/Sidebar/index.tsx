@@ -10,7 +10,7 @@ import { ChatListItem } from "./ChatListItem";
 import { NewChat } from "./NewChat";
 import {
   ChatList,
-  Content,
+  SidebarContainer,
   Header,
   HeaderButtonArea,
   HeaderButtons,
@@ -49,7 +49,7 @@ const Sidebar: React.FC<IProps> = ({ user, activeChat, setActiveChat }) => {
   }, [searchChatName]);
 
   return (
-    <Content>
+    <SidebarContainer>
       <NewChat
         user={user}
         showNewChat={showNewChat}
@@ -101,7 +101,7 @@ const Sidebar: React.FC<IProps> = ({ user, activeChat, setActiveChat }) => {
           />
         ))}
       </ChatList>
-    </Content>
+    </SidebarContainer>
   );
 };
 

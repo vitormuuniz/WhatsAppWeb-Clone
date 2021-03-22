@@ -1,7 +1,7 @@
 import React from "react";
 import { ChatIntro } from "./ChatIntro";
 import { ChatWindow } from "./ChatWindow";
-import { Content } from "./styles";
+import { ContentAreaContainer } from "./styles";
 
 interface IProps {
   user: any;
@@ -9,13 +9,13 @@ interface IProps {
 }
 const ContentArea: React.FC<IProps> = ({ user, activeChat }) => {
   return (
-    <Content>
+    <ContentAreaContainer>
       {activeChat === null ? (
         <ChatIntro />
       ) : (
         <ChatWindow user={user} activeChat={activeChat} />
       )}
-    </Content>
+    </ContentAreaContainer>
   );
 };
 

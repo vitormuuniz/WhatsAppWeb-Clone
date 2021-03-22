@@ -1,5 +1,5 @@
 import React from "react";
-import { Content, FacebookButton, GoogleButton } from "./styles";
+import { LoginContainer, FacebookButton, GoogleButton } from "./styles";
 import { fbPopup, googlePopup } from "../../config/Api";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
@@ -26,7 +26,7 @@ const Login: React.FC<IProps> = ({ onReceive }) => {
   }
 
   return (
-    <Content>
+    <LoginContainer>
       <FacebookButton className="facebook" onClick={handleFacebookLogin}>
         <FacebookIcon />
         Logar com Facebook
@@ -35,7 +35,7 @@ const Login: React.FC<IProps> = ({ onReceive }) => {
         <AccountBoxIcon />
         Logar com Google
       </GoogleButton>
-    </Content>
+    </LoginContainer>
   );
 };
 
