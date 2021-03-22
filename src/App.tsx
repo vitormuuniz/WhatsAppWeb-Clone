@@ -1,41 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { ContentArea } from "./components/ContentArea";
 import { Login } from "./components/Login";
 import { Sidebar } from "./components/Sidebar";
-import { addUser } from "./config/Api";
-import { AppContainer } from "./styles";
+import { ApplicationContext } from "./context/ApplicationContext";
+import { StyAppContainer } from "./styles";
 
 function App() {
-  const [activeChat, setActiveChat] = useState<any>(null);
-  const [user, setUser] = useState<any>(null);
-
-  const handleLoginData = async (u: any) => {
-    const newUser = {
-      id: u.uid,
-      name: u.displayName,
-      avatar: u.photoURL,
-    };
-
-    await addUser(newUser);
-
-    setUser(newUser);
-  };
+  const { user } = useContext(ApplicationContext);
 
   return (
-    <AppContainer>
+    <StyAppContainer>
       {user === null ? (
-        <Login onReceive={handleLoginData} />
+        <Login />
       ) : (
         <React.Fragment>
-          <Sidebar
-            user={user}
-            activeChat={activeChat}
-            setActiveChat={setActiveChat}
-          />
-          <ContentArea user={user} activeChat={activeChat} />
+          <Sidebar />
+          <ContentArea />
         </React.Fragment>
       )}
-    </AppContainer>
+    </StyAppContainer>
   );
 }
 

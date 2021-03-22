@@ -2,30 +2,27 @@ import ChatIcon from "@material-ui/icons/Chat";
 import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import SearchIcon from "@material-ui/icons/Search";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { onChatList } from "../../config/Api";
+import { ApplicationContext } from "../../context/ApplicationContext";
 import { Chat } from "../../interfaces/Chat";
-import { User } from "../../interfaces/User";
 import { ChatListItem } from "./ChatListItem";
 import { NewChat } from "./NewChat";
 import {
-  ChatList,
-  SidebarContainer,
-  Header,
-  HeaderButtonArea,
-  HeaderButtons,
-  HeaderImage,
-  Search,
-  SearchInput,
-  SearchInputArea,
+  StyChatList,
+  StySidebarContainer,
+  StyHeader,
+  StyHeaderButtonArea,
+  StyHeaderButtons,
+  StyHeaderImage,
+  StySearch,
+  StySearchInput,
+  StySearchInputArea,
 } from "./styles";
 
-interface IProps {
-  user: User;
-  activeChat: Chat;
-  setActiveChat: Function;
-}
-const Sidebar: React.FC<IProps> = ({ user, activeChat, setActiveChat }) => {
+const Sidebar = () => {
+  const { user, activeChat, setActiveChat } = useContext(ApplicationContext);
+
   const [showNewChat, setShowNewChat] = useState<boolean>(false);
   const [chatList, setChatList] = useState<Chat[]>([]);
   const [searchChatName, setSearchChatName] = useState<string>("");
@@ -42,45 +39,45 @@ const Sidebar: React.FC<IProps> = ({ user, activeChat, setActiveChat }) => {
     );
 
     if (searchChatName === "" || results.length === 0) {
-      onChatList(user.id!, setChatList);
+      onChatList(user?.id!, setChatList);
     } else {
       setChatList(results);
     }
   }, [searchChatName]);
 
   return (
-    <SidebarContainer>
+    <StySidebarContainer>
       <NewChat
         user={user}
         showNewChat={showNewChat}
         setShowNewChat={setShowNewChat}
       />
-      <Header>
-        <HeaderImage src={user.avatar} />
+      <StyHeader>
+        <StyHeaderImage src={user?.avatar} />
 
-        <HeaderButtons>
-          <HeaderButtonArea>
+        <StyHeaderButtons>
+          <StyHeaderButtonArea>
             <DonutLargeIcon htmlColor="#919191" />
-          </HeaderButtonArea>
+          </StyHeaderButtonArea>
 
-          <HeaderButtonArea>
+          <StyHeaderButtonArea>
             <ChatIcon
               htmlColor="#919191"
               onClick={() => setShowNewChat(true)}
             />
-          </HeaderButtonArea>
+          </StyHeaderButtonArea>
 
-          <HeaderButtonArea>
+          <StyHeaderButtonArea>
             <MoreVertIcon htmlColor="#919191" />
-          </HeaderButtonArea>
-        </HeaderButtons>
-      </Header>
+          </StyHeaderButtonArea>
+        </StyHeaderButtons>
+      </StyHeader>
 
-      <Search>
-        <SearchInputArea>
+      <StySearch>
+        <StySearchInputArea>
           <SearchIcon htmlColor="#919191" fontSize="small" />
 
-          <SearchInput
+          <StySearchInput
             type="search"
             placeholder="Procurar ou começar uma nova conversa"
             value={searchChatName}
@@ -88,20 +85,20 @@ const Sidebar: React.FC<IProps> = ({ user, activeChat, setActiveChat }) => {
               setSearchChatName(event.target.value);
             }}
           />
-        </SearchInputArea>
-      </Search>
+        </StySearchInputArea>
+      </StySearch>
 
-      <ChatList>
+      <StyChatList>
         {chatList.map((chat: Chat, key: number) => (
           <ChatListItem
             key={key}
             onClick={() => setActiveChat(chat)}
             chat={chat}
-            active={activeChat && activeChat.chatId === chat.chatId}
+            active={activeChat! && activeChat?.chatId! === chat.chatId}
           />
         ))}
-      </ChatList>
-    </SidebarContainer>
+      </StyChatList>
+    </StySidebarContainer>
   );
 };
 

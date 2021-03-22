@@ -1,21 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ApplicationContext } from "../../context/ApplicationContext";
 import { ChatIntro } from "./ChatIntro";
 import { ChatWindow } from "./ChatWindow";
-import { ContentAreaContainer } from "./styles";
+import { StyContentAreaContainer } from "./styles";
 
-interface IProps {
-  user: any;
-  activeChat: any;
-}
-const ContentArea: React.FC<IProps> = ({ user, activeChat }) => {
+const ContentArea = () => {
+  const { user, activeChat } = useContext(ApplicationContext);
+
   return (
-    <ContentAreaContainer>
+    <StyContentAreaContainer>
       {activeChat === null ? (
         <ChatIntro />
       ) : (
         <ChatWindow user={user} activeChat={activeChat} />
       )}
-    </ContentAreaContainer>
+    </StyContentAreaContainer>
   );
 };
 
