@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ChatIntroContainer = styled.div`
+export const StyChatIntroContainer = styled.div`
   background-color: #f8f9fa;
   display: flex;
   flex-direction: column;
@@ -26,7 +26,7 @@ export const ChatIntroContainer = styled.div`
   }
 `;
 
-export const HorizontalLine = styled.hr`
+export const StyHorizontalLine = styled.hr`
   width: 100%;
   height: 6px;
   margin: 0;
@@ -36,7 +36,7 @@ export const HorizontalLine = styled.hr`
   bottom: 0;
 `;
 
-export const ChatIntroImage = styled.img`
+export const StyChatIntroImage = styled.img`
   width: 250px;
   height: auto;
 `;

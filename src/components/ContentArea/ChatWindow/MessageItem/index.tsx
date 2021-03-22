@@ -2,10 +2,10 @@ import React from "react";
 import { Message } from "../../../../interfaces/Message";
 import { User } from "../../../../interfaces/User";
 import {
-  MessageContent,
-  MessageDate,
-  MessageLine,
-  MessageObject,
+  StyMessageContent,
+  StyMessageDate,
+  StyMessageLine,
+  StyMessageObject,
 } from "./styles";
 
 interface IProps {
@@ -16,12 +16,12 @@ interface IProps {
 
 const MessageItem: React.FC<IProps> = ({ key, user, message }) => {
   return (
-    <MessageLine key={key} sentByMe={user.id === message.idAuthor}>
-      <MessageObject sentByMe={user.id === message.idAuthor}>
-        <MessageContent>{message.content}</MessageContent>
-        <MessageDate>{message.date}</MessageDate>
-      </MessageObject>
-    </MessageLine>
+    <StyMessageLine key={key} sentByMe={user.id === message.idAuthor}>
+      <StyMessageObject sentByMe={user.id === message.idAuthor}>
+        <StyMessageContent>{message.content}</StyMessageContent>
+        <StyMessageDate>{message.date}</StyMessageDate>
+      </StyMessageObject>
+    </StyMessageLine>
   );
 };
 

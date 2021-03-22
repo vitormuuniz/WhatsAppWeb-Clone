@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SidebarContainer = styled.div`
+export const StySidebarContainer = styled.div`
   width: 35%;
   max-width: 415px;
   display: flex;
@@ -8,7 +8,7 @@ export const SidebarContainer = styled.div`
   border-right: 1px solid #ddd;
 `;
 
-export const Header = styled.header`
+export const StyHeader = styled.header`
   height: 60px;
   display: flex;
   justify-content: space-between;
@@ -16,19 +16,19 @@ export const Header = styled.header`
   padding: 0 15px;
 `;
 
-export const HeaderImage = styled.img`
+export const StyHeaderImage = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 50%;
   cursor: pointer;
 `;
 
-export const HeaderButtons = styled.div`
+export const StyHeaderButtons = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
-export const HeaderButtonArea = styled.div`
+export const StyHeaderButtonArea = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -38,13 +38,13 @@ export const HeaderButtonArea = styled.div`
   cursor: pointer;
 `;
 
-export const Search = styled.div`
+export const StySearch = styled.div`
   background-color: #f6f6f6;
   border-bottom: 1px solid #eee;
   padding: 5px 15px;
 `;
 
-export const SearchInputArea = styled.div`
+export const StySearchInputArea = styled.div`
   background-color: #fff;
   height: 40px;
   border-radius: 20px;
@@ -53,7 +53,7 @@ export const SearchInputArea = styled.div`
   padding: 0 10px;
 `;
 
-export const SearchInput = styled.input`
+export const StySearchInput = styled.input`
   flex: 1;
   border: 0;
   outline: 0;
@@ -61,7 +61,7 @@ export const SearchInput = styled.input`
   margin-left: 10px;
 `;
 
-export const ChatList = styled.div`
+export const StyChatList = styled.div`
   flex: 1;
   background-color: #fff;
   overflow-y: auto;

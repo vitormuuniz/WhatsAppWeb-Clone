@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LoginContainer = styled.div`
+export const StyLoginContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,10 +29,10 @@ export const LoginContainer = styled.div`
   }
 `;
 
-export const FacebookButton = styled.button`
+export const StyFacebookButton = styled.button`
   background-color: #1877f2;
 `;
 
-export const GoogleButton = styled.button`
+export const StyGoogleButton = styled.button`
   background-color: #008000;
 `;

@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import { addNewChat, getContactsList } from "../../../config/Api";
 import { User } from "../../../interfaces/User";
 import {
-  Contact,
-  ContactImage,
-  ContactName,
-  ContactsList,
-  NewChatContainer,
-  Header,
-  HeaderBackButton,
-  HeaderTitle,
+  StyContact,
+  StyContactImage,
+  StyContactName,
+  StyContactsList,
+  StyNewChatContainer,
+  StyHeader,
+  StyHeaderBackButton,
+  StyHeaderTitle,
 } from "./styles";
 
 interface IProps {
@@ -33,7 +33,13 @@ const NewChat: React.FC<IProps> = ({ user, showNewChat, setShowNewChat }) => {
   }, [user, setList]);
 
   async function createNewChat(user2: User) {
-    await addNewChat(user, user2);
+    let results: User[] = await getContactsList(user.id!);
+
+    results = results.filter((aux: User) => {
+      if (aux.id === user2.id) return aux;
+    });
+
+    if (results.length === 0) await addNewChat(user, user2);
 
     handleClose();
   }
@@ -43,22 +49,22 @@ const NewChat: React.FC<IProps> = ({ user, showNewChat, setShowNewChat }) => {
   }
 
   return (
-    <NewChatContainer showNewChat={showNewChat}>
-      <Header>
-        <HeaderBackButton>
+    <StyNewChatContainer showNewChat={showNewChat}>
+      <StyHeader>
+        <StyHeaderBackButton>
           <ArrowBackIcon htmlColor="#FFF" onClick={handleClose} />
-        </HeaderBackButton>
-        <HeaderTitle>Nova Conversa</HeaderTitle>
-      </Header>
-      <ContactsList>
+        </StyHeaderBackButton>
+        <StyHeaderTitle>Nova Conversa</StyHeaderTitle>
+      </StyHeader>
+      <StyContactsList>
         {list.map((contact: User, key: number) => (
-          <Contact key={key} onClick={() => createNewChat(contact)}>
-            <ContactImage src={contact.avatar} />
-            <ContactName>{contact.name}</ContactName>
-          </Contact>
+          <StyContact key={key} onClick={() => createNewChat(contact)}>
+            <StyContactImage src={contact.avatar} />
+            <StyContactName>{contact.name}</StyContactName>
+          </StyContact>
         ))}
-      </ContactsList>
-    </NewChatContainer>
+      </StyContactsList>
+    </StyNewChatContainer>
   );
 };
 

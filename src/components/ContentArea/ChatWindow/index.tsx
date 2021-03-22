@@ -16,20 +16,20 @@ import { Message } from "../../../interfaces/Message";
 import { User } from "../../../interfaces/User";
 import { MessageItem } from "./MessageItem";
 import {
-  Body,
-  ButtonArea,
-  ChatWindowContainer,
-  EmojiArea,
-  Footer,
-  FooterInput,
-  FooterInputArea,
-  FooterPos,
-  FooterPre,
-  Header,
-  HeaderAvatar,
-  HeaderButtons,
-  HeaderInfo,
-  HeaderName,
+  StyBody,
+  StyButtonArea,
+  StyChatWindowContainer,
+  StyEmojiArea,
+  StyFooter,
+  StyFooterInput,
+  StyFooterInputArea,
+  StyFooterPos,
+  StyFooterPre,
+  StyHeader,
+  StyHeaderAvatar,
+  StyHeaderButtons,
+  StyHeaderInfo,
+  StyHeaderName,
 } from "./styles";
 
 interface IProps {
@@ -106,83 +106,83 @@ const ChatWindow: React.FC<IProps> = ({ user, activeChat }) => {
   }
 
   return (
-    <ChatWindowContainer>
-      <Header>
-        <HeaderInfo>
-          <HeaderAvatar src={activeChat.image} />
+    <StyChatWindowContainer>
+      <StyHeader>
+        <StyHeaderInfo>
+          <StyHeaderAvatar src={activeChat.image} />
 
-          <HeaderName>{activeChat.name}</HeaderName>
-        </HeaderInfo>
+          <StyHeaderName>{activeChat.name}</StyHeaderName>
+        </StyHeaderInfo>
 
-        <HeaderButtons>
-          <ButtonArea>
+        <StyHeaderButtons>
+          <StyButtonArea>
             <SearchIcon htmlColor="#919191" />
-          </ButtonArea>
+          </StyButtonArea>
 
-          <ButtonArea>
+          <StyButtonArea>
             <MoreVertIcon htmlColor="#919191" />
-          </ButtonArea>
-        </HeaderButtons>
-      </Header>
+          </StyButtonArea>
+        </StyHeaderButtons>
+      </StyHeader>
 
-      <Body ref={bodyRef}>
+      <StyBody ref={bodyRef}>
         {messagesList.map((message: any, key: number) => (
           <MessageItem key={key} user={user} message={message} />
         ))}
-      </Body>
+      </StyBody>
 
-      <EmojiArea emojiOpen={emojiOpen}>
+      <StyEmojiArea emojiOpen={emojiOpen}>
         <EmojiPicker
           disableSearchBar
           disableSkinTonePicker
           onEmojiClick={handleEmojiClick}
         />
-      </EmojiArea>
+      </StyEmojiArea>
 
-      <Footer>
-        <FooterPre>
+      <StyFooter>
+        <StyFooterPre>
           {emojiOpen && (
-            <ButtonArea>
+            <StyButtonArea>
               <CloseIcon htmlColor="#919191" onClick={handleCloseEmoji} />
-            </ButtonArea>
+            </StyButtonArea>
           )}
-          <ButtonArea>
+          <StyButtonArea>
             <InsertEmoticonIcon
               htmlColor={emojiOpen ? "#009688" : "#919191"}
               onClick={handleOpenEmoji}
             />
-          </ButtonArea>
-          <ButtonArea>
+          </StyButtonArea>
+          <StyButtonArea>
             <AttachFileIcon htmlColor="#919191" />
-          </ButtonArea>
-        </FooterPre>
+          </StyButtonArea>
+        </StyFooterPre>
 
-        <FooterInputArea>
-          <FooterInput
+        <StyFooterInputArea>
+          <StyFooterInput
             type="text"
             placeholder="Digite uma mensagem"
             value={text}
             onChange={(e) => setText(e.target.value)}
             onKeyUp={handleInputKeyUp}
           />
-        </FooterInputArea>
+        </StyFooterInputArea>
 
-        <FooterPos>
+        <StyFooterPos>
           {text.length === 0 ? (
-            <ButtonArea>
+            <StyButtonArea>
               <MicIcon
                 htmlColor={listening ? "#126ECE" : "#919191"}
                 onClick={handleMicClick}
               />
-            </ButtonArea>
+            </StyButtonArea>
           ) : (
-            <ButtonArea>
+            <StyButtonArea>
               <SendIcon htmlColor="#919191" onClick={handleSendClick} />
-            </ButtonArea>
+            </StyButtonArea>
           )}
-        </FooterPos>
-      </Footer>
-    </ChatWindowContainer>
+        </StyFooterPos>
+      </StyFooter>
+    </StyChatWindowContainer>
   );
 };
 

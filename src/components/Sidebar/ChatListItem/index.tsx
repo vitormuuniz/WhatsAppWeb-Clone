@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Chat } from "../../../interfaces/Chat";
 import {
-  Avatar,
-  ChatListItemContainer,
-  Line,
-  LineContactName,
-  LineDate,
-  LineLastMsg,
-  Lines,
+  StyAvatar,
+  StyChatListItemContainer,
+  StyLine,
+  StyLineContactName,
+  StyLineDate,
+  StyLineLastMsg,
+  StyLines,
 } from "./styles";
 
 interface IProps {
@@ -41,20 +41,20 @@ const ChatListItem: React.FC<IProps> = ({ key, onClick, chat, active }) => {
   }, [chat]);
 
   return (
-    <ChatListItemContainer key={key} onClick={onClick} active={active}>
-      <Avatar src={chat.image} />
-      <Lines>
-        <Line>
-          <LineContactName>{chat.name}</LineContactName>
-          <LineDate>{lastMessageDate}</LineDate>
-        </Line>
-        <Line>
-          <LineLastMsg>
+    <StyChatListItemContainer key={key} onClick={onClick} active={active}>
+      <StyAvatar src={chat.image} />
+      <StyLines>
+        <StyLine>
+          <StyLineContactName>{chat.name}</StyLineContactName>
+          <StyLineDate>{lastMessageDate}</StyLineDate>
+        </StyLine>
+        <StyLine>
+          <StyLineLastMsg>
             <p>{chat.lastMessage}</p>
-          </LineLastMsg>
-        </Line>
-      </Lines>
-    </ChatListItemContainer>
+          </StyLineLastMsg>
+        </StyLine>
+      </StyLines>
+    </StyChatListItemContainer>
   );
 };
 

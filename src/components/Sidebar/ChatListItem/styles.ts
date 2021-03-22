@@ -4,7 +4,7 @@ interface IContent {
   readonly onClick: any;
   readonly active: boolean;
 }
-export const ChatListItemContainer = styled.div<IContent>`
+export const StyChatListItemContainer = styled.div<IContent>`
   display: flex;
   cursor: pointer;
   align-items: center;
@@ -17,14 +17,14 @@ export const ChatListItemContainer = styled.div<IContent>`
   background-color: ${(props) => props.active && "#EBEBEB"};
 `;
 
-export const Avatar = styled.img`
+export const StyAvatar = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50%;
   margin-left: 15px;
 `;
 
-export const Lines = styled.div`
+export const StyLines = styled.div`
   flex: 1;
   height: 100%;
   display: flex;
@@ -38,24 +38,24 @@ export const Lines = styled.div`
   min-width: 0;
 `;
 
-export const Line = styled.div`
+export const StyLine = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 `;
 
-export const LineContactName = styled.div`
+export const StyLineContactName = styled.div`
   font-size: 17px;
   color: #000;
 `;
 
-export const LineDate = styled.div`
+export const StyLineDate = styled.div`
   font-size: 12px;
   color: #999;
 `;
 
-export const LineLastMsg = styled.div`
+export const StyLineLastMsg = styled.div`
   font-size: 14px;
   color: #999;
   display: flex;

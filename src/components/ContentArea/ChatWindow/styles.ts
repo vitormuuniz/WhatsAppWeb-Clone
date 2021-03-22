@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-export const ChatWindowContainer = styled.div`
+export const StyChatWindowContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
 `;
 
-export const Header = styled.div`
+export const StyHeader = styled.div`
   height: 60px;
   border-bottom: 1px solid #ccc;
   display: flex;
@@ -14,13 +14,13 @@ export const Header = styled.div`
   align-items: center;
 `;
 
-export const HeaderInfo = styled.div`
+export const StyHeaderInfo = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
 `;
 
-export const HeaderAvatar = styled.img`
+export const StyHeaderAvatar = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -28,18 +28,18 @@ export const HeaderAvatar = styled.img`
   margin-right: 15px;
 `;
 
-export const HeaderName = styled.div`
+export const StyHeaderName = styled.div`
   font-size: 17px;
   color: #000;
 `;
 
-export const HeaderButtons = styled.div`
+export const StyHeaderButtons = styled.div`
   display: flex;
   align-items: center;
   margin-right: 15px;
 `;
 
-export const ButtonArea = styled.div`
+export const StyButtonArea = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -49,7 +49,7 @@ export const ButtonArea = styled.div`
   cursor: pointer;
 `;
 
-export const Body = styled.div`
+export const StyBody = styled.div`
   flex: 1;
   overflow-y: auto;
   background-color: #e5ddd5;
@@ -68,10 +68,10 @@ export const Body = styled.div`
   }
 `;
 
-interface IEmojiArea {
+interface IStyEmojiArea {
   readonly emojiOpen: boolean;
 }
-export const EmojiArea = styled.div<IEmojiArea>`
+export const StyEmojiArea = styled.div<IStyEmojiArea>`
   height: ${(props) => (props.emojiOpen ? `200px` : `0`)};
   overflow-y: hidden;
   transition: all ease 0.3s;
@@ -86,22 +86,22 @@ export const EmojiArea = styled.div<IEmojiArea>`
   }
 `;
 
-export const Footer = styled.div`
+export const StyFooter = styled.div`
   height: 62px;
   display: flex;
   align-items: center;
 `;
 
-export const FooterPre = styled.div`
+export const StyFooterPre = styled.div`
   display: flex;
   margin: 0 15px;
 `;
 
-export const FooterInputArea = styled.div`
+export const StyFooterInputArea = styled.div`
   flex: 1;
 `;
 
-export const FooterInput = styled.input`
+export const StyFooterInput = styled.input`
   width: 100%;
   height: 40px;
   border: 0;
@@ -113,7 +113,7 @@ export const FooterInput = styled.input`
   padding-left: 15px;
 `;
 
-export const FooterPos = styled.div`
+export const StyFooterPos = styled.div`
   display: flex;
   margin: 0 15px 0 30px;
 `;

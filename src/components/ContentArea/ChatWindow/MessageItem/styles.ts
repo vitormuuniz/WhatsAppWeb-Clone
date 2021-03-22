@@ -1,18 +1,18 @@
 import styled from "styled-components";
 
-interface IMessageLine {
+interface IStyMessageLine {
   readonly sentByMe: boolean;
 }
-export const MessageLine = styled.div<IMessageLine>`
+export const StyMessageLine = styled.div<IStyMessageLine>`
   margin-bottom: 10px;
   display: flex;
   justify-content: ${(props) => (props.sentByMe ? `flex-end` : `flex-start`)};
 `;
 
-interface IMessageObject {
+interface IStyMessageObject {
   readonly sentByMe: boolean;
 }
-export const MessageObject = styled.div<IMessageObject>`
+export const StyMessageObject = styled.div<IStyMessageObject>`
   background-color: ${(props) => (props.sentByMe ? `#dcf8c6` : `#fff`)};
   border-radius: 10px;
   box-shadow: 0 1px 1px #ccc;
@@ -22,12 +22,12 @@ export const MessageObject = styled.div<IMessageObject>`
   max-width: 90%;
 `;
 
-export const MessageContent = styled.div`
+export const StyMessageContent = styled.div`
   font-size: 14px;
   margin: 5px 40px 5px 5px;
 `;
 
-export const MessageDate = styled.div`
+export const StyMessageDate = styled.div`
   font-size: 12px;
   color: #999;
   margin-right: 5px;

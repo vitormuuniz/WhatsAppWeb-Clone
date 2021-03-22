@@ -3,7 +3,7 @@ import styled from "styled-components";
 interface IContent {
   readonly showNewChat: boolean;
 }
-export const NewChatContainer = styled.div<IContent>`
+export const StyNewChatContainer = styled.div<IContent>`
   width: 35%;
   max-width: 415px;
   position: fixed;
@@ -17,14 +17,14 @@ export const NewChatContainer = styled.div<IContent>`
   transition: all ease 0.5s;
 `;
 
-export const Header = styled.div`
+export const StyHeader = styled.div`
   display: flex;
   background-color: #00bfa5;
   align-items: center;
   padding: 60px 15px 15px 15px;
 `;
 
-export const HeaderBackButton = styled.div`
+export const StyHeaderBackButton = styled.div`
   width: 40px;
   height: 40px;
   display: flex;
@@ -33,7 +33,7 @@ export const HeaderBackButton = styled.div`
   cursor: pointer;
 `;
 
-export const HeaderTitle = styled.div`
+export const StyHeaderTitle = styled.div`
   font-size: 19px;
   height: 40px;
   line-height: 40px;
@@ -43,7 +43,7 @@ export const HeaderTitle = styled.div`
   margin-left: 20px;
 `;
 
-export const ContactsList = styled.div`
+export const StyContactsList = styled.div`
   flex: 1;
   overflow-y: auto;
 
@@ -57,7 +57,7 @@ export const ContactsList = styled.div`
   }
 `;
 
-export const Contact = styled.div`
+export const StyContact = styled.div`
   display: flex;
   align-items: center;
   padding: 15px;
@@ -68,14 +68,14 @@ export const Contact = styled.div`
   }
 `;
 
-export const ContactImage = styled.img`
+export const StyContactImage = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50%;
   margin-right: 15px;
 `;
 
-export const ContactName = styled.div`
+export const StyContactName = styled.div`
   font-size: 17px;
   color: #000;
 `;
